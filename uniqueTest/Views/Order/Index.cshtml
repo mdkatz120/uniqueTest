@@ -1,0 +1,68 @@
+﻿@{
+    ViewData["Title"] = "Order";
+}
+
+<h2>הזמנה</h2>
+<form>
+    <div class="form-group">
+        <select class="form-control" name="type" id="typeSlct" onchange="filteredTable(this.value)">
+            <option value="breakfast" selected>ארוחת בוקר</option>
+            <option value="lunch">ארוחת צהריים</option>
+            <option value="dinner">ארוחת ערב</option>
+        </select>
+    </div>
+</form>
+
+<hr />
+<table id="myTable">
+    <tr>
+        <th>name</th>
+        <th>type</th>
+    <tr>
+        <td>shakshuka</td>
+        <td>breakfast</td>
+    </tr>
+    <tr>
+        <td>chicken</td>
+        <td>lunch</td>
+    </tr>
+    <tr>
+        <td>Omlet</td>
+        <td>breakfast</td>
+    </tr>
+    <tr>
+        <td>fish &amp; Chips</td>
+        <td>dinner</td>
+    </tr>
+</table>
+<script>
+ 
+function filteredTable(value) {
+  var input, filter, table, tr, td, i, txtValue;
+  txtValue = '';
+  input = value;
+  filter = input.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    tds = tr[i].getElementsByTagName("td");
+    for(var j = 0;j< tds.length;j++){
+    if (tds[j]) {
+      txtValue = (tds[j].textContent || tds[j].innerText) ;     
+      
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      console.log('correct filter: ' +filter +',    txtValue: '+txtValue)
+        tr[i].style.display = "";
+        txtValue = '';
+        break;
+      } else {
+       console.log('not filter: ' +filter +', txtValue: '+txtValue)
+        tr[i].style.display = "none";
+        txtValue = '';
+      }
+      }
+      }
+           
+  }
+}
+</script>
